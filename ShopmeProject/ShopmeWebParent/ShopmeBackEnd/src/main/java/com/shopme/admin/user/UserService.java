@@ -101,11 +101,15 @@ public class UserService {
 		userRepo.updateEnableStatus(id, enabled);
     }
     
-    public Page<User> listByPage(int pageNumber,String sortField, String sortDirecn) {
+    public Page<User> listByPage(int pageNumber,String sortField, String sortDirecn,String keyword) {
     	Sort sort = Sort.by(sortField);
     	sort =sortDirecn.equals("asc") ? sort.ascending() : sort.descending();
     	
     	Pageable pageable=PageRequest.of(pageNumber-1, USER_PAGE_SIZE, sort);
+    	
+    	if(keyword !=null) {
+    		return userRepo.findAll(keyword,pageable);
+    	}
     	return userRepo.findAll(pageable);
     }
 }

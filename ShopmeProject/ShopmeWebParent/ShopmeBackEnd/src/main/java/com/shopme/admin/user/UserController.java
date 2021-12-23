@@ -37,13 +37,13 @@ public class UserController {
 
 	@GetMapping("/users")
 	public String listFirstPage(Model model) {
-		return listByPage(1,"firstName", "asc", model);
+		return listByPage(1,"firstName", "asc", model,null);
 	}
 	
 	@GetMapping("/users/page/{pageNumber}")
-	public String listByPage(@PathVariable(name="pageNumber") int pageNumber,@Param(value="sortField") String sortField,@Param(value="sortDirecn") String sortDirecn,Model model) {
+	public String listByPage(@PathVariable(name="pageNumber") int pageNumber,@Param(value="sortField") String sortField,@Param(value="sortDirecn") String sortDirecn,Model model, @Param(value="keyword") String keyword) {
 		//List<User> listUsers = service.listAll();
-		Page<User> page=service.listByPage(pageNumber,sortField,sortDirecn);
+		Page<User> page=service.listByPage(pageNumber,sortField,sortDirecn,keyword);
 		List<User> listUsers=page.getContent();
 //		System.out.println("PageNumber"+", "+page.getNumber());
 //		System.out.println("ElementsPerPage"+", "+page.getNumberOfElements());
@@ -53,6 +53,7 @@ public class UserController {
 		int previousPage=currentPage-1;
 		int nextPage=currentPage+1;
 		int lastPage=page.getTotalPages();
+		int totalPage=page.getTotalPages();
 		int startCount=(pageNumber-1)*service.USER_PAGE_SIZE+1;
 		int endCount=startCount+service.USER_PAGE_SIZE-1;
 		if(startCount>page.getTotalElements()) {
@@ -72,10 +73,12 @@ public class UserController {
 		model.addAttribute("previousPage", previousPage);
 		model.addAttribute("nextPage", nextPage);
 		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("listUsers", listUsers);
 		model.addAttribute("sortDirecn", sortDirecn);
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("reverseDirection", reverseDirection);
+		model.addAttribute("keyword", keyword);
 		return "users";
 	}
 	

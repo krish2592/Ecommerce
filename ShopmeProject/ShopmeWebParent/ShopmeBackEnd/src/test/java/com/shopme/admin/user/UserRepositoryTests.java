@@ -128,7 +128,7 @@ public class UserRepositoryTests {
 	 public void searchByKeyword() {
 		 int pageNumber=0;
 		 int pageSize=4;
-		 String keyword="Amina";
+		 String keyword="Bruce";
 		 
 		 	 Pageable pageable=PageRequest.of(pageNumber, pageSize);
 			 Page<User> page=repo.findAll(keyword,pageable);
