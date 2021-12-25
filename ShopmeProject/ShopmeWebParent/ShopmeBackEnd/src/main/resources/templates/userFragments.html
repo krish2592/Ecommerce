@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<th th:fragment="column_link(fieldName,columnLabel)"><a
+		class="text-white"
+		th:href="@{/users/page/}+${currentPage}+'?sortField='+${fieldName}+'&sortDirecn='+${sortField != fieldName ? sortDirecn : reverseDirection}+${keyword !=null ? '&keyword='+ keyword : ''}">
+			[[${columnLabel}]]</a> <span th:if="${sortField == fieldName}"
+		th:class="${sortDirecn == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}">
+	</span></th>
+
+	
+	<a th:fragment="pagination_link(pageNum,pageLabel)"
+	    class="page-link"
+		th:href="@{/users/page/}+${pageNum}+'?sortField='+${sortField}+'&sortDirecn='+${sortDirecn}+${keyword !=null ? '&keyword='+ keyword : ''}">
+		[[${pageLabel}]]
+	</a>
+
+</body>
+</html>
