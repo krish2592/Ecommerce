@@ -56,17 +56,22 @@
 		</div>
 		<div>
 			<h2>Manage Users</h2>
-			<a th:href="@{/users/new}">Create New User</a>
+			<a th:href="@{/users/new}">Create New User</a> |
+			<a th:href="@{/users/export/csv}">Export to CSV</a> |
+			<a th:href="@{/users/export/excel}">Export to Excel</a> |
+			<a th:href="@{/users/export/pdf}">Export to PDF</a>
 		</div>
 
 		<div>
-		<form th:action="@{/users/page/1}" class="form-inline m-2">&emsp;
-		<input type="hidden" name="sortField" th:value="${sortField}">
-		<input type="hidden" name="sortDirecn" th:value="${sortDirecn}">
-		<input type="search" placeholder="Search" name="keyword" required th:value="${keyword}" class="form-control">&emsp;
-		<input type="submit" value="Search" class="btn btn-primary">&emsp;
-		<input type="button" value="Clear" class="btn btn-secondary" onclick="clearSearch()">
-		</form>
+			<form th:action="@{/users/page/1}" class="form-inline m-2">
+				&emsp; <input type="hidden" name="sortField" th:value="${sortField}">
+				<input type="hidden" name="sortDirecn" th:value="${sortDirecn}">
+				<input type="search" placeholder="Search" name="keyword" required
+					th:value="${keyword}" class="form-control">&emsp; <input
+					type="submit" value="Search" class="btn btn-primary">&emsp;
+				<input type="button" value="Clear" class="btn btn-secondary"
+					onclick="clearSearch()">
+			</form>
 		</div>
 
 		<div th:if="${message}" class="alert alert-sucess text-center">[[${message}]]</div>
@@ -79,8 +84,10 @@
 						<th th:replace="userFragments :: column_link(id,'User ID')"></th>
 						<th>Photos</th>
 						<th th:replace="userFragments :: column_link(email,'E-mail')"></th>
-						<th th:replace="userFragments :: column_link(firstName,'First Name')"></th>
-						<th th:replace="userFragments :: column_link(lastName,'Last Name')"></th>
+						<th
+							th:replace="userFragments :: column_link(firstName,'First Name')"></th>
+						<th
+							th:replace="userFragments :: column_link(lastName,'Last Name')"></th>
 						<th>Role</th>
 						<th th:replace="userFragments :: column_link(enabled,'Enabled')"></th>
 						<th></th>
@@ -145,22 +152,29 @@
 
 		<div th:if="${totalPage>1}">
 			<ul class="pagination justify-content-center">
-				<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-				<a th:replace="userFragments :: pagination_link(1,'First')"></a>
+				<li
+					th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+					<a th:replace="userFragments :: pagination_link(1,'First')"></a>
 				</li>
-				<li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-				<a th:replace="userFragments :: pagination_link(${currentPage-1},'Previous')"></a>
+				<li
+					th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+					<a
+					th:replace="userFragments :: pagination_link(${currentPage-1},'Previous')"></a>
 				</li>
-				<li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
-					th:each="i:${#numbers.sequence(1,lastPage)}">
-				<a th:replace="userFragments :: pagination_link(${i},${i})"></a>
-				</li>
-				<li th:class="${currentPage < lastPage ? 'page-item' : 'page-item disabled'}"> 
-				<a th:replace="userFragments :: pagination_link(${nextPage},'Next')">
+				<li
+					th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+					th:each="i:${#numbers.sequence(1,lastPage)}"><a
+					th:replace="userFragments :: pagination_link(${i},${i})"></a></li>
+				<li
+					th:class="${currentPage < lastPage ? 'page-item' : 'page-item disabled'}">
+					<a
+					th:replace="userFragments :: pagination_link(${nextPage},'Next')">
 				</a>
 				</li>
-				<li th:class="${currentPage < lastPage ? 'page-item' : 'page-item disabled'}">
-				<a th:replace="userFragments :: pagination_link(${lastPage},'Last')"></a>
+				<li
+					th:class="${currentPage < lastPage ? 'page-item' : 'page-item disabled'}">
+					<a
+					th:replace="userFragments :: pagination_link(${lastPage},'Last')"></a>
 				</li>
 			</ul>
 		</div>
@@ -191,6 +205,6 @@
 	}
 	</script>
 
-	
+
 </body>
 </html>
