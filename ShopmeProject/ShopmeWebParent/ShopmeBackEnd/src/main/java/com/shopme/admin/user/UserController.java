@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopme.admin.FileUploadUtil;
 import com.shopme.admin.user.export.UserCsvExporter;
+import com.shopme.admin.user.export.UserExcelExporter;
 import com.shopme.common.entity.Role;
 import com.shopme.common.entity.User;
 
@@ -170,5 +171,10 @@ public class UserController {
 		userCsvExporter.export(listUsers, response);
 	}
 	
-	
+	@GetMapping("/users/export/excel")
+	public void exportToExcel(HttpServletResponse response) throws IOException {
+		List<User> listUsers=service.listAll();
+		UserExcelExporter userExcelExporter = new UserExcelExporter();
+		userExcelExporter.export(listUsers, response);
+	}
 }
