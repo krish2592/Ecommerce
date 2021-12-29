@@ -20,7 +20,7 @@ public class UserExcelExporter extends ExporterFileType {
 	public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
 		super.setHeader("application/octet-stream", ".xlsx", response);
 		XSSFWorkbook workbook= new XSSFWorkbook();
-		XSSFSheet sheet=workbook.createSheet("Users");
+		XSSFSheet sheet=workbook.createSheet("List of Users");
 		XSSFCellStyle xssfCellStyle=workbook.createCellStyle();
 		XSSFFont xssfFont=workbook.createFont();
 		xssfFont.setBold(true);
